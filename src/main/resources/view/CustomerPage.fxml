@@ -96,13 +96,13 @@
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tblCustomer" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="75.0" text="Customer Id" />
-                <TableColumn prefWidth="75.0" text="Name" />
-                  <TableColumn prefWidth="75.0" text="Nic" />
-                  <TableColumn prefWidth="75.0" text="Email" />
-                  <TableColumn prefWidth="75.0" text="Phone" />
+                <TableColumn fx:id="colId" prefWidth="75.0" text="Customer Id" />
+                <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="colNic" prefWidth="75.0" text="Nic" />
+                  <TableColumn fx:id="colEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="colPhone" prefWidth="75.0" text="Phone" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

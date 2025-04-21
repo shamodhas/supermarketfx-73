@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * --------------------------------------------
@@ -36,6 +37,7 @@ public class CustomerModel {
             String nextIdString = String.format(tableCharacter + "%03d", nextIdNUmber); // "C002"
             return nextIdString;
         }
+        // No data recode in table so return initial primary key
         return tableCharacter + "001";
     }
 
@@ -58,7 +60,23 @@ public class CustomerModel {
         return isSaved;
     }
 
-    public void getAllCustomer() {
+    public ArrayList<CustomerDTO> getAllCustomer() throws SQLException {
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement pst = connection.prepareStatement("select * from customer");
+        ResultSet resultSet = pst.executeQuery();
 
+        ArrayList<CustomerDTO> customerDTOArrayList = new ArrayList<>();
+        while (resultSet.next()) {
+            CustomerDTO customerDTO = new CustomerDTO(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5)
+            );
+            customerDTOArrayList.add(customerDTO);
+        }
+
+        return customerDTOArrayList;
     }
 }
