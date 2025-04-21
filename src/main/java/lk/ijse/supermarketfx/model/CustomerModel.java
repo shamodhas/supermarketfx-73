@@ -2,6 +2,7 @@ package lk.ijse.supermarketfx.model;
 
 import lk.ijse.supermarketfx.db.DBConnection;
 import lk.ijse.supermarketfx.dto.CustomerDTO;
+import lk.ijse.supermarketfx.util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,11 +24,12 @@ import java.util.ArrayList;
 public class CustomerModel {
 
     public String getNextCustomerId() throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement pst = connection.prepareStatement(
-                "select customer_id from customer order by customer_id desc limit 1"
-        );
-        ResultSet resultSet = pst.executeQuery();
+//        Connection connection = DBConnection.getInstance().getConnection();
+//        PreparedStatement pst = connection.prepareStatement(
+//                "select customer_id from customer order by customer_id desc limit 1"
+//        );
+//        ResultSet resultSet = pst.executeQuery();
+        ResultSet resultSet = CrudUtil.execute("select customer_id from customer order by customer_id desc limit 1");
         char tableCharacter = 'C'; // Use any character Ex:- customer table for C, item table for I
         if (resultSet.next()) {
             String lastId = resultSet.getString(1); // "C001"
@@ -42,28 +44,36 @@ public class CustomerModel {
     }
 
     public boolean saveCustomer(CustomerDTO customerDTO) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
+//        Connection connection = DBConnection.getInstance().getConnection();
+//
+//        // insert into customer values ('C001','Bob','1111111111111','bob@gmail.com','077777777')
+//        // insert into customer values (?,?,?,?,?)
+//        PreparedStatement pst = connection.prepareStatement("insert into customer values (?,?,?,?,?)");
+//
+//        // set values for ? marks
+//        pst.setString(1, customerDTO.getCustomerId());
+//        pst.setString(2, customerDTO.getName());
+//        pst.setString(3, customerDTO.getNic());
+//        pst.setString(4, customerDTO.getEmail());
+//        pst.setString(5, customerDTO.getPhone());
 
-        // insert into customer values ('C001','Bob','1111111111111','bob@gmail.com','077777777')
-        // insert into customer values (?,?,?,?,?)
-        PreparedStatement pst = connection.prepareStatement("insert into customer values (?,?,?,?,?)");
-
-        // set values for ? marks
-        pst.setString(1, customerDTO.getCustomerId());
-        pst.setString(2, customerDTO.getName());
-        pst.setString(3, customerDTO.getNic());
-        pst.setString(4, customerDTO.getEmail());
-        pst.setString(5, customerDTO.getPhone());
-
-        int i = pst.executeUpdate();
-        boolean isSaved = i > 0;
-        return isSaved;
+//        int i = pst.executeUpdate();
+//        boolean isSaved = i > 0;
+//        return isSaved;
+        return CrudUtil.execute(
+                "insert into customer values (?,?,?,?,?)",
+                customerDTO.getCustomerId(),
+                customerDTO.getName(),
+                customerDTO.getNic(),
+                customerDTO.getEmail(),
+                customerDTO.getPhone()
+        );
     }
 
     public ArrayList<CustomerDTO> getAllCustomer() throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement pst = connection.prepareStatement("select * from customer");
-        ResultSet resultSet = pst.executeQuery();
+//        Connection connection = DBConnection.getInstance().getConnection();
+//        PreparedStatement pst = connection.prepareStatement("select * from customer");
+        ResultSet resultSet = CrudUtil.execute("select * from customer");
 
         ArrayList<CustomerDTO> customerDTOArrayList = new ArrayList<>();
         while (resultSet.next()) {

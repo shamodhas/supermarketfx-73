@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.supermarketfx.dto.CustomerDTO;
 import lk.ijse.supermarketfx.dto.tm.CustomerTM;
 import lk.ijse.supermarketfx.model.CustomerModel;
@@ -14,6 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * --------------------------------------------
@@ -63,20 +65,48 @@ public class CustomerPageController implements Initializable {
     }
 
     private void loadTableData() throws SQLException {
-        ArrayList<CustomerDTO> customerDTOArrayList = customerModel.getAllCustomer();
-        ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
+//        1.
+//        ArrayList<CustomerDTO> customerDTOArrayList = customerModel.getAllCustomer();
+//        ObservableList<CustomerTM> customerTMS = FXCollections.observableArrayList();
 
-        for (CustomerDTO customerDTO : customerDTOArrayList){
-            CustomerTM customerTM = new CustomerTM(
-                    customerDTO.getCustomerId(),
-                    customerDTO.getName(),
-                    customerDTO.getNic(),
-                    customerDTO.getEmail(),
-                    customerDTO.getPhone()
-            );
-            customerTMS.add(customerTM);
+//        for (CustomerDTO customerDTO : customerDTOArrayList) {
+//            CustomerTM customerTM = new CustomerTM(
+//                    customerDTO.getCustomerId(),
+//                    customerDTO.getName(),
+//                    customerDTO.getNic(),
+//                    customerDTO.getEmail(),
+//                    customerDTO.getPhone()
+//            );
+//            customerTMS.add(customerTM);
+//        }
+//        tblCustomer.setItems(customerTMS);
+
+//        2. Full short code (Single line)
+        tblCustomer.setItems(FXCollections.observableArrayList(
+                customerModel.getAllCustomer().stream()
+                        .map(customerDTO -> new CustomerTM(
+                                customerDTO.getCustomerId(),
+                                customerDTO.getName(),
+                                customerDTO.getNic(),
+                                customerDTO.getEmail(),
+                                customerDTO.getPhone()
+                        )).toList()
+        ));
+    }
+
+    private void resetPage() {
+        try {
+            loadTableData();
+            loadNextId();
+
+            txtName.setText("");
+            txtNic.setText("");
+            txtEmail.setText("");
+            txtPhone.setText("");
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Something went wrong.").show();
         }
-        tblCustomer.setItems(customerTMS);
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
@@ -103,6 +133,7 @@ public class CustomerPageController implements Initializable {
             boolean isSaved = customerModel.saveCustomer(customerDTO);
 
             if (isSaved) {
+                resetPage();
                 new Alert(Alert.AlertType.INFORMATION, "Customer saved successfully.").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Fail to save customer.").show();
@@ -118,5 +149,20 @@ public class CustomerPageController implements Initializable {
     private void loadNextId() throws SQLException {
         String nextId = customerModel.getNextCustomerId();
         lblCustomerId.setText(nextId);
+    }
+
+    public void onClickTable(MouseEvent mouseEvent) {
+        CustomerTM selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null) {
+            lblCustomerId.setText(selectedItem.getCustomerId());
+            txtName.setText(selectedItem.getName());
+            txtNic.setText(selectedItem.getNic());
+            txtEmail.setText(selectedItem.getEmail());
+            txtPhone.setText(selectedItem.getPhone());
+
+            // save button disable
+            // update, delete button enable
+        }
     }
 }
