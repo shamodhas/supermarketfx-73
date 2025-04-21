@@ -23,27 +23,20 @@ public class CustomerModel {
 
     public String getNextCustomerId() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-
         PreparedStatement pst = connection.prepareStatement(
                 "select customer_id from customer order by customer_id desc limit 1"
         );
-
         ResultSet resultSet = pst.executeQuery();
-
-        // C,I
+        char tableCharacter = 'C'; // Use any character Ex:- customer table for C, item table for I
         if (resultSet.next()) {
-            // C001
-            String lastId = resultSet.getString(1);
-            // 001
-            String lastIdNumberString = lastId.substring(1);
-            int lastIdNumber = Integer.parseInt(lastIdNumberString);
-            int nextIdNUmber = lastIdNumber + 1;
-            // I
-            String nextIdString = String.format("C%03d", nextIdNUmber);
+            String lastId = resultSet.getString(1); // "C001"
+            String lastIdNumberString = lastId.substring(1); // "001"
+            int lastIdNumber = Integer.parseInt(lastIdNumberString); // 1
+            int nextIdNUmber = lastIdNumber + 1; // 2
+            String nextIdString = String.format(tableCharacter + "%03d", nextIdNUmber); // "C002"
             return nextIdString;
         }
-        // I
-        return "C001";
+        return tableCharacter + "001";
     }
 
     public boolean saveCustomer(CustomerDTO customerDTO) throws SQLException {
