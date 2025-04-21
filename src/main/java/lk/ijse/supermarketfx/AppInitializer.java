@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lk.ijse.supermarketfx.db.DBConnection;
 
 /**
  * --------------------------------------------
@@ -20,6 +21,9 @@ import javafx.stage.Stage;
 public class AppInitializer extends Application {
     public static void main(String[] args) {
         launch(args);
+
+//        new DBConnection();
+//        DBConnection.getInstance();
     }
 
     @Override
