@@ -127,7 +127,9 @@ public class CustomerPageController implements Initializable {
                 phone
         );
 
-        // Call CustomerModel inside saveCustomer method and parse
+        // Call CustomerModel inside saveCustomer
+        // method and parse
+
         // controller to model parse data using dto
         try {
             boolean isSaved = customerModel.saveCustomer(customerDTO);
