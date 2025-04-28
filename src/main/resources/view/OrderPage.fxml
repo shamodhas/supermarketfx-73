@@ -60,7 +60,7 @@
                                     <Font name="Calibri" size="14.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="cmbCustomerId" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #7367F0; -fx-border-width: 0 0 1px 0;" />
+                              <ComboBox fx:id="cmbCustomerId" onAction="#cmbCustomerOnAction" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #7367F0; -fx-border-width: 0 0 1px 0;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
@@ -94,7 +94,7 @@
                                     <Font name="Calibri" size="14.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="cmbItemId" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #7367F0; -fx-border-width: 0 0 1px 0;" />
+                              <ComboBox fx:id="cmbItemId" onAction="#cmbItemOnAction" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-border-color: #7367F0; -fx-border-width: 0 0 1px 0;" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT">
@@ -153,7 +153,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="txtAddToCartQty" maxWidth="1.7976931348623157E308" promptText="0" style="-fx-background-color: #ffffff; -fx-border-width: 0 0 1px 0; -fx-border-color: #000;" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #3498db;" text="Add To Cart" textFill="WHITE" HBox.hgrow="ALWAYS">
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefWidth="80.0" style="-fx-background-color: #3498db;" text="Add To Cart" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
@@ -180,7 +180,7 @@
             </TableView>
             <HBox alignment="CENTER_RIGHT" spacing="30.0">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #e74c3c;" text="Reset" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnResetOnAction" prefWidth="80.0" style="-fx-background-color: #e74c3c;" text="Reset" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
@@ -188,7 +188,7 @@
                         <Cursor fx:constant="CLOSED_HAND" />
                      </cursor>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #2ecc71;" text="Place Order" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" prefWidth="80.0" style="-fx-background-color: #2ecc71;" text="Place Order" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>

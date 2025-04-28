@@ -106,6 +106,28 @@ public class CustomerModel {
                 customerId
         );
     }
+
+    public ArrayList<String> getAllCustomerIds() throws SQLException {
+        ResultSet rst = CrudUtil.execute("select customer_id from customer");
+        ArrayList<String> list = new ArrayList<>();
+        while (rst.next()) {
+            String id = rst.getString(1);
+            list.add(id);
+        }
+        return list;
+    }
+
+    public String findNameById(String selectedCustomerId) throws SQLException {
+        ResultSet rst = CrudUtil.execute(
+                "select name from customer where customer_id=?",
+                selectedCustomerId
+        );
+
+        if (rst.next()) {
+            return rst.getString(1);
+        }
+        return null;
+    }
 }
 
 
