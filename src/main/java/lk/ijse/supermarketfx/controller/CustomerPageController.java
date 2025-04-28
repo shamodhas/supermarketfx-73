@@ -51,7 +51,7 @@ public class CustomerPageController implements Initializable {
     public Button btnUpdate;
     public Button btnSave;
 
-    private final String namePattern = "^[A-Za-z ]$";
+    private final String namePattern = "^[A-Za-z ]+$";
     private final String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
     private final String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private final String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
@@ -142,9 +142,15 @@ public class CustomerPageController implements Initializable {
 //        if (!isValidName) return;
 
         txtName.setStyle(txtName.getStyle() + ";-fx-border-color: #7367F0;");
-        if (!isValidName) {
-            txtName.setStyle(txtName.getStyle() + ";-fx-border-color: red;");
-        }
+        txtNic.setStyle(txtNic.getStyle() + ";-fx-border-color: #7367F0;");
+        txtEmail.setStyle(txtEmail.getStyle() + ";-fx-border-color: #7367F0;");
+        txtPhone.setStyle(txtPhone.getStyle() + ";-fx-border-color: #7367F0;");
+
+        if (!isValidName) txtName.setStyle(txtName.getStyle() + ";-fx-border-color: red;");
+        if (!isValidNic) txtNic.setStyle(txtNic.getStyle() + ";-fx-border-color: red;");
+        if (!isValidEmail) txtEmail.setStyle(txtEmail.getStyle() + ";-fx-border-color: red;");
+        if (!isValidPhone) txtPhone.setStyle(txtPhone.getStyle() + ";-fx-border-color: red;");
+
 
 //        [A-Za-z ]+
 //        1. Using Pattern object java.util.regex
