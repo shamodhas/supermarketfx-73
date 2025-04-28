@@ -66,27 +66,27 @@
             </VBox>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button minWidth="150.0" mnemonicParsing="false" style="-fx-background-color: #778CA3;" text="Genarate Report" textFill="WHITE">
+                  <Button fx:id="btnReport" minWidth="150.0" mnemonicParsing="false" style="-fx-background-color: #778CA3;" text="Genarate Report" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #FC5C65;" text="Reset" textFill="WHITE">
+                  <Button fx:id="btnReset" layoutX="10.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #FC5C65;" text="Reset" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="62.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #EB3B5A;" text="Delete" textFill="WHITE">
+                  <Button fx:id="btnDelete" layoutX="62.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #EB3B5A;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="114.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #2D98DA;" text="Update" textFill="WHITE">
+                  <Button fx:id="btnUpdate" layoutX="114.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #2D98DA;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="166.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #26DE81;" text="Save" textFill="WHITE">
+                  <Button fx:id="btnSave" layoutX="166.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #26DE81;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>

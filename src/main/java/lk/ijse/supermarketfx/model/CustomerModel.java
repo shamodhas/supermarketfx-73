@@ -1,11 +1,8 @@
 package lk.ijse.supermarketfx.model;
 
-import lk.ijse.supermarketfx.db.DBConnection;
 import lk.ijse.supermarketfx.dto.CustomerDTO;
 import lk.ijse.supermarketfx.util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -89,4 +86,35 @@ public class CustomerModel {
 
         return customerDTOArrayList;
     }
+
+    public boolean updateCustomer(CustomerDTO customerDTO) throws SQLException {
+//       search by customerDTO.getCustomerId()
+//       update all data
+        return CrudUtil.execute(
+                "update customer set name=?, nic=?, email=?, phone=? where customer_id=?",
+                customerDTO.getName(),
+                customerDTO.getNic(),
+                customerDTO.getEmail(),
+                customerDTO.getPhone(),
+                customerDTO.getCustomerId()
+        );
+    }
+
+    public boolean deleteCustomer(String customerId) throws SQLException {
+        return CrudUtil.execute(
+                "delete from customer where customer_id=?",
+                customerId
+        );
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
