@@ -2,18 +2,32 @@ package lk.ijse.supermarketfx.controller;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import lk.ijse.supermarketfx.db.DBConnection;
 import lk.ijse.supermarketfx.dto.CustomerDTO;
 import lk.ijse.supermarketfx.dto.tm.CustomerTM;
 import lk.ijse.supermarketfx.model.CustomerModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -283,4 +297,71 @@ public class CustomerPageController implements Initializable {
         }
     }
 
+    public void btnAllCustomerReportOnAction(ActionEvent actionEvent) {
+        try {
+            JasperReport report = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/report/customer_report_73.jrxml")
+            );
+            Connection connection = DBConnection.getInstance().getConnection();
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("P_DATE", LocalDate.now().toString());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    report,
+                    parameters,
+                    connection
+            );
+            JasperViewer.viewReport(jasperPrint, false);
+
+            // List
+            // Array list
+            // index value
+            // 0 - ""
+            // 1 - ""
+
+            // Map
+            // HashMap
+            // key value
+            // "hello" - "hi"
+
+//            JasperFillManager.fillReport(
+//                    report,
+//                    null,
+//                    connection
+//            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void btnMailModalOnAction(ActionEvent actionEvent) {
+        CustomerTM selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            return;
+        }
+
+        try {
+            FXMLLoader loadedFxml = new FXMLLoader(
+                    getClass().getResource("/view/SendMailPage.fxml")
+            );
+            Parent load = loadedFxml.load();
+
+            String email = selectedItem.getEmail();
+            SendMailPageController sendMailPageController = loadedFxml.getController();
+            sendMailPageController.setCustomerEmail(email);
+//            sendMailPageController.hello();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(load));
+            stage.setTitle("Send mail");
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            Window window = txtEmail.getScene().getWindow();
+            stage.initOwner(window);
+            stage.showAndWait();
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Fail to load ui..!").show();
+            e.printStackTrace();
+        }
+
+    }
 }

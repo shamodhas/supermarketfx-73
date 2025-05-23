@@ -9,7 +9,6 @@
 
 <!--XML -> javafx -> FXML-->
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.supermarketfx.controller.DashboardController">
    <children>
       <VBox prefHeight="400.0" prefWidth="200.0" spacing="50.0" style="-fx-background-color: #9b59b6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -32,6 +31,11 @@
                      </font>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#btnGoOrderPageOnAction" prefWidth="160.0" style="-fx-background-color: #9b59b6;" text="Order" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnSendMailPageOnAction" prefWidth="160.0" style="-fx-background-color: #9b59b6;" text="Send mail" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

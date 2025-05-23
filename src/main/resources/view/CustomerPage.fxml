@@ -66,7 +66,7 @@
             </VBox>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnReport" minWidth="150.0" mnemonicParsing="false" style="-fx-background-color: #778CA3;" text="Genarate Report" textFill="WHITE">
+                  <Button fx:id="btnReport" minWidth="150.0" mnemonicParsing="false" onAction="#btnAllCustomerReportOnAction" style="-fx-background-color: #778CA3;" text="All Customer Report" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
@@ -87,6 +87,11 @@
                      </font>
                   </Button>
                   <Button fx:id="btnSave" layoutX="166.0" layoutY="10.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #26DE81;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="20.0" minWidth="100.0" mnemonicParsing="false" onAction="#btnMailModalOnAction" style="-fx-background-color: #778CA3;" text="Mail" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="13.0" />
                      </font>
